@@ -3,6 +3,8 @@
   <p>Flight No: #{{ flight.id }}</p>
   <p>Date: {{ flight.date | date: 'dd.MM.yyyy HH:mm' }}</p>
 
+  <app-flight-status-toggle [(delayed)]="flight.delayed"></app-flight-status-toggle>
+
   <ng-container *ngIf="!selected">
     <button class="btn btn-default" (click)="select()">SELECT</button>
   </ng-container>
