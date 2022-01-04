@@ -1,0 +1,9 @@
+.flight-card {
+  padding: 20px;
+  width: 300px;
+  background-color: lightsteelblue;
+}
+
+.selected {
+  background-color: orange;
+}

@@ -1,0 +1,12 @@
+<div class="flight-card" [ngClass]="{ selected: selected }">
+  <h2>{{ flight.from }} - {{ flight.to }}</h2>
+  <p>Flight No: #{{ flight.id }}</p>
+  <p>Date: {{ flight.date | date: 'dd.MM.yyyy HH:mm' }}</p>
+
+  <ng-container *ngIf="!selected">
+    <button class="btn btn-default" (click)="select()">SELECT</button>
+  </ng-container>
+  <ng-container *ngIf="selected">
+    <button class="btn btn-default" (click)="deselect()">DESELECT</button>
+  </ng-container>
+</div>
