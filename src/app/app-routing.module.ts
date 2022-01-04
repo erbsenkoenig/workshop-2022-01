@@ -1,7 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PassengerComponent } from './passenger/passenger.component';
-import { FlightSearchComponent } from './flight-booking/flight-search/flight-search.component';
 
 export const AppRoutingModule = RouterModule.forRoot([
   {
@@ -15,12 +14,7 @@ export const AppRoutingModule = RouterModule.forRoot([
   },
   {
     path: 'flight-booking',
-    children: [
-      {
-        path: 'flight-search',
-        component: FlightSearchComponent,
-      },
-    ],
+    loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule),
   },
   {
     path: 'passenger',
