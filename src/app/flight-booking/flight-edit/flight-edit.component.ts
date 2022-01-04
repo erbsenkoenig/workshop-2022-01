@@ -1,22 +1,23 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlightService } from '../flight-search/flight.service';
 import { validateCity } from '../flight-search/validators';
-import { Flight } from '../../entities';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-flight-edit',
   templateUrl: './flight-edit.component.html',
   styleUrls: ['./flight-edit.component.css'],
 })
-export class FlightEditComponent implements OnChanges {
-  @Input() flight;
-  @Output() flightChange: EventEmitter<Flight> = new EventEmitter<Flight>();
-
+export class FlightEditComponent implements OnInit {
   result: 'SUCCESS' | 'FAILURE';
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, private flightService: FlightService) {
+  constructor(private fb: FormBuilder, private flightService: FlightService, private route: ActivatedRoute) {
+    console.log('ID', this.route.snapshot.paramMap.get('id'));
+  }
+
+  ngOnInit() {
     this.formGroup = this.fb.group({
       id: 0,
       from: [null, [Validators.required, validateCity]],
@@ -24,19 +25,18 @@ export class FlightEditComponent implements OnChanges {
       date: null,
       delayed: null,
     });
-  }
 
-  ngOnChanges(simpleChanges: SimpleChanges) {
-    if (simpleChanges.flight?.currentValue && !simpleChanges.flight?.firstChange) {
-      this.formGroup.patchValue(simpleChanges.flight?.currentValue);
-    }
+    this.flightService.getFlight(this.route.snapshot.paramMap.get('id')).subscribe({
+      next: (flight) => {
+        this.formGroup.patchValue(flight);
+      },
+    });
   }
 
   saveFlight() {
     this.result = null;
     this.flightService.saveFlight(this.formGroup.value).subscribe({
-      next: (flight) => {
-        this.flightChange.emit(flight);
+      next: () => {
         this.result = 'SUCCESS';
       },
       error: () => {

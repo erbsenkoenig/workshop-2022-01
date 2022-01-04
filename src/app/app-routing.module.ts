@@ -13,7 +13,7 @@ export const AppRoutingModule = RouterModule.forRoot([
     component: HomeComponent,
   },
   {
-    path: 'flight-booking',
+    path: 'flights',
     loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule),
   },
   {

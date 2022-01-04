@@ -4,7 +4,9 @@ import { Flight } from '../../entities';
 import { Observable } from 'rxjs';
 import { BASE_URL } from './tokens';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class FlightService {
   constructor(private http: HttpClient, @Inject(BASE_URL) private url) {
     console.log('HELLO WORLD, FLIGHT SERVICE');
@@ -20,6 +22,12 @@ export class FlightService {
   saveFlight(flight: Flight): Observable<Flight> {
     const headers = new HttpHeaders().set('Accept', 'application/json');
 
-    return this.http.post<Flight>(this.url, flight,{ headers });
+    return this.http.post<Flight>(this.url, flight, { headers });
+  }
+
+  getFlight(id: string): Observable<Flight> {
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+
+    return this.http.get<Flight>(`${this.url}/${id}`, { headers });
   }
 }

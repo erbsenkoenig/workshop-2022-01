@@ -1,7 +1,21 @@
+<div>
+  <a routerLink="/flights">BACK</a>
+</div>
 <div class="card">
   <div class="header">
     <h2 class="title">Flight Edit</h2>
   </div>
+
+  <ng-container *ngIf="result === 'SUCCESS'">
+    <div class="bg-success">
+      Your changes were successfully saved
+    </div>
+  </ng-container>
+  <ng-container *ngIf="result === 'FAILURE'">
+    <div class="bg-danger">
+      An unexpected error occurred please try again later.
+    </div>
+  </ng-container>
 
   <div class="content">
     <form [formGroup]="formGroup" (ngSubmit)="saveFlight()">

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Flight } from '../../../entities';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-card',
@@ -11,9 +12,8 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() selected: boolean;
 
   @Output() selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() edit: EventEmitter<Flight> = new EventEmitter<Flight>();
 
-  constructor() {
+  constructor(private router: Router, private route: ActivatedRoute) {
     console.log('CONSTRUCTOR', this.flight, this.selected);
   }
 
@@ -34,7 +34,8 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onEdit() {
-    this.edit.emit(this.flight);
+    this.router.navigate(['flights', this.flight.id]);
+    // this.router.navigate([this.flight.id], { relativeTo: this.route });
   }
 
   deselect() {
