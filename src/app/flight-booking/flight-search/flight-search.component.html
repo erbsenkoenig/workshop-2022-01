@@ -4,7 +4,7 @@
   </div>
 
   <div class="content">
-    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+    <form>
       <div class="form-group">
         <label>From</label>
         <input class="form-control" type="text" name="from" [(ngModel)]="from" />
@@ -15,7 +15,7 @@
       </div>
 
       <div class="form-group">
-        <button [disabled]="searchDisabled" type="submit" class="btn btn-default">Search</button>
+        <button [disabled]="searchDisabled" class="btn btn-default" (click)="search()">Search</button>
       </div>
     </form>
   </div>
@@ -27,6 +27,7 @@
       [flight]="flight"
       [selected]="basket[flight.id]"
       (selectedChange)="updateBasket($event, flight.id)"
+      (edit)="selectForEdit($event)"
     ></app-flight-card>
   </div>
 </div>
@@ -36,3 +37,5 @@
     <pre>{{ basket | json }}</pre>
   </div>
 </div>
+
+<app-flight-edit [flight]="editableFlight" (flightChange)="updateFlights($event)"></app-flight-edit>

@@ -16,4 +16,10 @@ export class FlightService {
 
     return this.http.get<Flight[]>(this.url, { params, headers });
   }
+
+  saveFlight(flight: Flight): Observable<Flight> {
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+
+    return this.http.post<Flight>(this.url, flight,{ headers });
+  }
 }

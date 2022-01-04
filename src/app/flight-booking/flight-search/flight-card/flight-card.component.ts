@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Flight } from '../../../entities';
 
 @Component({
@@ -10,7 +10,8 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() flight: Flight;
   @Input() selected: boolean;
 
-  @Output() selectedChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() edit: EventEmitter<Flight> = new EventEmitter<Flight>();
 
   constructor() {
     console.log('CONSTRUCTOR', this.flight, this.selected);
@@ -29,10 +30,14 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   select() {
-    this.selectedChange.next('SELECTED');
+    this.selectedChange.next(true);
+  }
+
+  onEdit() {
+    this.edit.emit(this.flight);
   }
 
   deselect() {
-    this.selectedChange.next('DESELECTED');
+    this.selectedChange.next(false);
   }
 }
