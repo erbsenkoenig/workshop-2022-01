@@ -6,14 +6,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { FlightSearchComponent } from './flight-booking/flight-search/flight-search.component';
-import { CityPipe } from './shared/city.pipe';
-import { SharedModule } from './shared/shared.module';
 import { FlightBookingModule } from './flight-booking/flight-booking.module';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { PassengerComponent } from './passenger/passenger.component';
 
 @NgModule({
-  imports: [BrowserModule, HttpClientModule, FormsModule, FlightBookingModule],
-  declarations: [AppComponent, SidebarComponent, NavbarComponent],
+  imports: [BrowserModule, HttpClientModule, FormsModule, FlightBookingModule, AppRoutingModule],
+  declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, PassengerComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

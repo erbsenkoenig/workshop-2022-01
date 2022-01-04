@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlightService } from '../flight-search/flight.service';
 import { validateCity } from '../flight-search/validators';
@@ -27,7 +27,7 @@ export class FlightEditComponent implements OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if (simpleChanges.flight?.currentValue) {
+    if (simpleChanges.flight?.currentValue && !simpleChanges.flight?.firstChange) {
       this.formGroup.patchValue(simpleChanges.flight?.currentValue);
     }
   }
