@@ -12,7 +12,7 @@ export class FlightSearchComponent implements OnInit {
   to: string;
 
   flights: Flight[] = [];
-  editableFlight: Flight;
+  // editableFlight: Flight;
 
   basket: object = {}; // {5: true}
 
@@ -22,29 +22,32 @@ export class FlightSearchComponent implements OnInit {
 
   search(): void {
     this.flightService.searchFlights(this.from, this.to).subscribe({
-      next: (flights) => (this.flights = flights),
+      next: (flights) => {
+        this.flights = flights;
+      },
     });
   }
 
-  selectForEdit(flight: Flight) {
-    this.editableFlight = flight;
-  }
+  // old edit way
+  // selectForEdit(flight: Flight) {
+  //   this.editableFlight = flight;
+  // }
 
   updateBasket(newValue: boolean, flightId: number) {
-    console.log(newValue);
     this.basket[flightId] = newValue; // {52: true}
   }
 
-  updateFlights(flight: Flight) {
-    const mappedFlight = this.flights.map((oldFlight) => {
-      if (oldFlight.id !== flight.id) {
-        return oldFlight;
-      }
-      return flight;
-    });
-
-    this.flights = [...mappedFlight];
-  }
+  // old edit way
+  // updateFlights(flight: Flight) {
+  //   const mappedFlight = this.flights.map((oldFlight) => {
+  //     if (oldFlight.id !== flight.id) {
+  //       return oldFlight;
+  //     }
+  //     return flight;
+  //   });
+  //
+  //   this.flights = [...mappedFlight];
+  // }
 
   get searchDisabled() {
     return !this.from || !this.to;
