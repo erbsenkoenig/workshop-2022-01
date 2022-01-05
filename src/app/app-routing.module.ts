@@ -16,8 +16,4 @@ export const AppRoutingModule = RouterModule.forRoot([
     path: 'flights',
     loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule),
   },
-  {
-    path: 'passenger',
-    component: PassengerComponent,
-  },
 ]);

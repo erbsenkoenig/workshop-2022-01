@@ -9,9 +9,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PassengerComponent } from './passenger/passenger.component';
+import { FlightBookingModule } from './flight-booking/flight-booking.module';
+import { PassengerModule } from './passenger/passenger.module';
 
 @NgModule({
-  imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, FormsModule, PassengerModule, AppRoutingModule],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, PassengerComponent],
   providers: [],
   bootstrap: [AppComponent],

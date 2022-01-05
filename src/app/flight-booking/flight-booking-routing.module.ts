@@ -4,12 +4,12 @@ import { FlightEditComponent } from './flight-edit/flight-edit.component';
 
 export const FlightBookingRoutingModule = RouterModule.forChild([
   {
-    path: '',
+    path: 'flights',
     pathMatch: 'full',
     component: FlightSearchComponent,
   },
   {
-    path: ':id',
+    path: 'flights/:id',
     component: FlightEditComponent,
   },
 ]);
