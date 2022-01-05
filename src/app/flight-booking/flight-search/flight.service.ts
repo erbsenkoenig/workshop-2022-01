@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Flight } from '../../entities';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { BASE_URL } from './tokens';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,21 @@ export class FlightService {
 
   searchFlights(from: string, to: string): Observable<Flight[]> {
     const params = new HttpParams().set('from', from).set('to', to);
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+
+    return this.http.get<Flight[]>(this.url, { params, headers }).pipe(
+      catchError((error) => {
+        if (error === 'BLA') {
+          throwError(() => 'INVALID USER INPUT');
+        }
+        // add toast nofitifaction
+        return of([]);
+      })
+    );
+  }
+
+  search(from: string): Observable<Flight[]> {
+    const params = new HttpParams().set('from', from);
     const headers = new HttpHeaders().set('Accept', 'application/json');
 
     return this.http.get<Flight[]>(this.url, { params, headers });

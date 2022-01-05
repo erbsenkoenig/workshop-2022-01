@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">Flight Search</h2>
+  </div>
+
+  <div class="content">
+    <div class="form-group">
+      <label>From</label>
+      <input class="form-control" type="text" [formControl]="formControl" />
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="content">
+    <div *ngIf="!loading && (!flights || !flights.length)">No flights found</div>
+
+    <div *ngIf="loading">LOADING FLIGHTS</div>
+
+    <table class="table table-condensed" *ngIf="flights && flights.length">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Date</th>
+          <th>Delayed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flights">
+          <th>{{ flight.id }}</th>
+          <th>{{ flight.from }}</th>
+          <th>{{ flight.to }}</th>
+          <th>{{ flight.date | date: 'dd.MM.yyyy HH:mm' }}</th>
+          <th>{{ flight.delayed }}</th>
+        </tr>
+      </tbody>
+    </table>
+    <ng-container></ng-container>
+  </div>
+</div>

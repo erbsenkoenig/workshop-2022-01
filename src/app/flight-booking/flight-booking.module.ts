@@ -6,9 +6,10 @@ import { FlightCardComponent } from './flight-search/flight-card/flight-card.com
 import { FlightStatusToggleComponent } from './flight-search/flight-card/flight-status-toggle/flight-status-toggle.component';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { FlightBookingRoutingModule } from './flight-booking-routing.module';
+import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
 
 @NgModule({
-  declarations: [FlightSearchComponent, FlightCardComponent, FlightStatusToggleComponent, FlightEditComponent],
+  declarations: [FlightSearchComponent, FlightCardComponent, FlightStatusToggleComponent, FlightEditComponent, FlightLookaheadComponent],
   imports: [CommonModule, SharedModule, FlightBookingRoutingModule],
 })
 export class FlightBookingModule {}

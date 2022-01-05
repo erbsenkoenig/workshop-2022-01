@@ -34,7 +34,7 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onEdit() {
-    this.router.navigate(['flights', this.flight.id]);
+    this.router.navigate(['flight-booking', 'flights', this.flight.id]);
     // this.router.navigate([this.flight.id], { relativeTo: this.route });
   }
 
