@@ -9,15 +9,18 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FlightService {
+  private readonly headers = new HttpHeaders().set('Accept', 'application/json');
+
   constructor(private http: HttpClient, @Inject(BASE_URL) private url) {
     console.log('HELLO WORLD, FLIGHT SERVICE');
   }
 
-  searchFlights(from: string, to: string): Observable<Flight[]> {
-    const params = new HttpParams().set('from', from).set('to', to);
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    return this.http.get<Flight[]>(this.url, { params, headers }).pipe(
+  searchFlights(from: string, to?: string): Observable<Flight[]> {
+    const params: { [key: string]: string } = { from };
+    if (to) {
+      params['to'] = to;
+    }
+    return this.http.get<Flight[]>(this.url, { params, headers: this.headers }).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.status >= 400 && error.status < 500) {
@@ -25,28 +28,17 @@ export class FlightService {
           }
         }
 
-        // add toast nofitifaction
+        // add toast notification or other global error handling
         return of([]);
       })
     );
   }
 
-  search(from: string): Observable<Flight[]> {
-    const params = new HttpParams().set('from', from);
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    return this.http.get<Flight[]>(this.url, { params, headers });
-  }
-
   saveFlight(flight: Flight): Observable<Flight> {
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    return this.http.post<Flight>(this.url, flight, { headers });
+    return this.http.post<Flight>(this.url, flight, { headers: this.headers });
   }
 
   getFlight(id: string): Observable<Flight> {
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    return this.http.get<Flight>(`${this.url}/${id}`, { headers });
+    return this.http.get<Flight>(`${this.url}/${id}`, { headers: this.headers });
   }
 }

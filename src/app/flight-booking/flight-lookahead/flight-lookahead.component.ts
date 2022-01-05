@@ -51,7 +51,7 @@ export class FlightLookaheadComponent implements OnInit, OnDestroy {
           tap(() => (this.loading = true)),
           switchMap((value: string) => {
             // return combineLatest(this.flightService.search(value), timer(700)); // DEPRECATED
-            return combineLatest([this.flightService.search(value), timer(400)]);
+            return combineLatest([this.flightService.searchFlights(value), timer(400)]);
           }),
           map((result: [Flight[], number]) => result[0])
         )
