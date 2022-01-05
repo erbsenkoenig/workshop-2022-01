@@ -71,5 +71,12 @@ describe('HomeComponent', () => {
     expect(counterElem.nativeElement.textContent).toContain('Counter: 2');
   });
 
-  it('should not decrease count if count is 0', () => {});
+  it('should not decrease count if count is 0', () => {
+    fixture.detectChanges(); // Change Detection + OnInit
+
+    const decreaseButton = fixture.debugElement.query(By.css('[data-testid="btn-decrease"]'));
+    decreaseButton.triggerEventHandler('click', null);
+
+    expect(component.count).toEqual(0);
+  });
 });
