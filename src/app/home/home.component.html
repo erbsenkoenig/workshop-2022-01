@@ -1,1 +1,4 @@
-<p>home works!</p>
+<p data-testid="counter">Counter: {{ count }}</p>
+
+<button data-testid="btn-increase" (click)="increase()">Increase</button>
+<button id="decrease-button" [disabled]="count === 0" data-testid="btn-decrease" (click)="decrease()">Decrease</button>
