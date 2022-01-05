@@ -24,7 +24,7 @@ export class FlightService {
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.status >= 400 && error.status < 500) {
-            throwError(() => 'INVALID USER INPUT');
+            return throwError('INVALID USER INPUT');
           }
         }
 

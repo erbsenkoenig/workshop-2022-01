@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FlightService } from './flight.service';
 import { Observable } from 'rxjs';
 import { Flight } from '../entities';
+import { FlightService } from './flight.service';
 
 @Injectable({
   providedIn: 'root',

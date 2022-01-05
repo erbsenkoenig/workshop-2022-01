@@ -13,7 +13,7 @@ export class FlightDataService {
 
   loadFlights(from: string) {
     this._flights$.next(null);
-    return this.flightService.search(from).subscribe((val) => this._flights$.next(val));
+    return this.flightService.searchFlights(from).subscribe((val) => this._flights$.next(val));
   }
 
   get flights$(): Observable<Flight[]> {
