@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { FlightService } from '../flight-search/flight.service';
 import { combineLatest, timer } from 'rxjs';
 import { Flight } from '../../entities';
@@ -28,10 +28,12 @@ export class FlightLookaheadComponent implements OnInit {
         distinctUntilChanged(),
         tap(() => (this.loading = true)),
         switchMap((value: string) => {
+          // return combineLatest(this.flightService.search(value), timer(700)); // DEPRECATED
           return combineLatest([this.flightService.search(value), timer(400)]);
-        })
+        }),
+        map((result: [Flight[], number]) => result[0])
       )
-      .subscribe(([flights]) => {
+      .subscribe((flights) => {
         this.flights = flights;
         this.loading = false;
       });

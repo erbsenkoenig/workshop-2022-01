@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Flight } from '../../entities';
 import { Observable, of, throwError } from 'rxjs';
 import { BASE_URL } from './tokens';
@@ -19,9 +19,12 @@ export class FlightService {
 
     return this.http.get<Flight[]>(this.url, { params, headers }).pipe(
       catchError((error) => {
-        if (error === 'BLA') {
-          throwError(() => 'INVALID USER INPUT');
+        if (error instanceof HttpErrorResponse) {
+          if (error.status >= 400 && error.status < 500) {
+            throwError(() => 'INVALID USER INPUT');
+          }
         }
+
         // add toast nofitifaction
         return of([]);
       })
