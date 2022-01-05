@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Flight } from '../../entities';
+import { Flight } from '../entities';
 import { Observable, of, throwError } from 'rxjs';
-import { BASE_URL } from './tokens';
+import { BASE_URL } from './flight-search/tokens';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({

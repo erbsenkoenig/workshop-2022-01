@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import { FlightService } from '../flight-search/flight.service';
+import { FlightService } from '../flight.service';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { Flight } from '../../entities';
 
